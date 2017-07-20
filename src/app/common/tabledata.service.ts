@@ -40,6 +40,16 @@ export class TabledataService {
     return this.mockData;
   }
 
+  public syncFetch() {
+    let xx = this.http.get(this.dataUrl).toPromise();
+    let data: any;
+    xx.then(res => {
+      console.log(res.json());
+      data = res.json();
+    });
+
+  }
+
   public fetchTabls():Promise<any> {
     return this.http.get(this.dataUrl).toPromise();
   }
