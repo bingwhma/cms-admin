@@ -1,0 +1,28 @@
+{
+  "port": 3000,
+  "protocol": "http",
+  "name": "admin",
+  "stubs": [
+    {
+      "responses": [
+        {
+          "is": {
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json"
+            },
+            "body": "<%- stringify(filename, 'tables_info.json') %>"
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "path": "/fetchtabs",
+            "method": "GET"
+          }
+        }
+      ]
+    }
+  ]
+}

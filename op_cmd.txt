@@ -1,0 +1,54 @@
+
+
+
+$ ng new cms-admin
+$ cd cms-admin/
+
+$ ng g component AdminHeader
+
+$ ng g component AdminFooter
+
+$ ng g component AdminMain
+
+$ ng g component Login
+
+$ ng g service ShowBanner
+
+$ ng g component admin-main/LeftPanel
+$ ng g component admin-main/RightPanel
+$ ng g component admin-main/Dashboard
+
+
+#################################
+// Statics
+import 'rxjs/add/observable/throw';
+// Operators
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/toPromise';
+#################################
+
+#####################
+mountebank使用手册
+
+npm install -g mountebank
+
+mb --configfile ./jsondata/admin.ejs --allowInjection
+####################
+
+####################
+修改package.json
+    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
+
+proxy.conf.json的配置如下
+{
+  "/api": {
+    "target": "http://10.4.60.200:8080",
+    "secure": false
+  }
+}
+####################

@@ -1,0 +1,18 @@
+{"level":"info","message":"[mb:2525] mountebank v1.11.0 now taking orders - point your browser to http://localhost:2525 for help","timestamp":"2017-07-20T01:59:32.327Z"}
+{"level":"warn","message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","timestamp":"2017-07-20T01:59:32.331Z"}
+{"level":"info","message":"[mb:2525] PUT /imposters","timestamp":"2017-07-20T01:59:32.379Z"}
+{"level":"info","message":"[http:3000 admin] Open for business...","timestamp":"2017-07-20T01:59:32.443Z"}
+{"level":"info","message":"[http:3000 admin] ::1:64235 => GET /fetchtabs","timestamp":"2017-07-20T01:59:43.130Z"}
+{"level":"info","message":"[http:3000 admin] ::1:64379 => GET /fetchtabs","timestamp":"2017-07-20T02:00:54.059Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65064 => GET /fetchtabs","timestamp":"2017-07-20T02:05:52.419Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65065 => GET /fetchtabs","timestamp":"2017-07-20T02:05:52.438Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65162 => GET /fetchtabs","timestamp":"2017-07-20T02:06:49.389Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65163 => GET /fetchtabs","timestamp":"2017-07-20T02:06:49.409Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65235 => GET /fetchtabs","timestamp":"2017-07-20T02:07:20.691Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65236 => GET /fetchtabs","timestamp":"2017-07-20T02:07:20.745Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65498 => GET /fetchtabs","timestamp":"2017-07-20T02:09:21.093Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65499 => GET /fetchtabs","timestamp":"2017-07-20T02:09:21.108Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65521 => GET /fetchtabs","timestamp":"2017-07-20T02:09:29.668Z"}
+{"level":"info","message":"[http:3000 admin] ::1:65522 => GET /fetchtabs","timestamp":"2017-07-20T02:09:29.683Z"}
+{"level":"info","message":"[http:3000 admin] ::1:49658 => GET /fetchtabs","timestamp":"2017-07-20T02:13:28.521Z"}
+{"level":"info","message":"[http:3000 admin] ::1:49659 => GET /fetchtabs","timestamp":"2017-07-20T02:13:28.545Z"}
