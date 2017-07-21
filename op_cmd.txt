@@ -66,3 +66,100 @@ git commit -m "first commit"
 git remote add origin https://github.com/bingwhma/cms-admin.git
 git push -u origin master
 #################################################
+
+
+
+进入列表页面之前需要先获取数据
+
+最后，再看看用Resolve来实现进入一个页面之前的数据初始化。
+
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Todo } from './todo';
+import { TodoService } from './todo.service';
+@Injectable()
+export class MyTodoResolver implements Resolve<Todo> {
+    constructor(private todoService: TodoService) { }
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        console.log('Get my todo list.');
+        return this.todoService.getAllTodos();
+    }
+}
+
+在这个resolve()方法中，直接返回调用todoService的getAllTodos()方法的结果。对这个getAllTodos()方法我们做一些修改，让他返回一些测试数据：
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+// 神略中间的部分
+  getAllTodos(): Observable<Todo[]> {
+    let todo1 = new Todo();
+    todo1.id = 1;
+    todo1.title = 'test task 1';
+    todo1.createdDate = new Date();
+    todo1.complete = false;
+    let todo2 = new Todo();
+    todo2.id = 2;
+    todo2.title = 'test task 2';
+    todo2.createdDate = new Date();
+    todo2.complete = false;
+    this.todos = [todo1, todo2];
+    return Observable.of(this.todos).delay(3000);
+  }
+
+在这个方法里我们创建了2个测试的任务，封装成Observable返回，并添加了一个3秒钟的延时，来模拟从服务器端获取数据的过程。
+通过Resolve方式获取的数据，会放在被激活的当前路由的data属性里面，我们可以在组件中来获得。所以，需要修改TodoListComponent，从路由的数据data中获取todos的值。然后就可以在页面中显示：
+
+export class TodoListComponent {
+    newTodo: Todo = new Todo();
+    todos: Todo[];
+    constructor(private todoService: TodoService, private route: ActivatedRoute) {
+        this.todos = this.route.snapshot.data['todos'];
+    }
+    // 省略其他
+}
+
+最终的todo模块路由配置
+
+最后我们再看看加上上面的Guard和Resolve的路由配置以后，todo模块的路由配置：
+
+export const TodoRoutes: Route[] = [
+    {
+        path: 'todo',
+        canActivateChild: [MyTodoGuard],
+        children: [
+            {
+                path: 'list',
+                component: TodoListComponent,
+                resolve: { todos: MyTodoResolver }
+            },
+            {
+                path: 'detail/:id',
+                component: TodoDetailComponent,
+                canDeactivate: [ CanLeaveTodoDetailGuard ]
+            }
+        ]
+    }
+];
+
+我们在’todo’的路由上加了一个canActivateChild控制能否激活子路径, 在list的子路径上配置了一个resolve来获取数据，在detail/:id上配置了一个canDeactivate来控制能否离开。
+
+但是，在这个实例中，我们要用data上添加的role: 'CUSTOMER'，用它来表示当前的这个路径，需要有CUSTOMER角色的用户才能访问。然后在MyTodoGuard里用它来判断：
+
+@Injectable()
+export class MyTodoGuard implements CanActivateChild {
+    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (!this.authService.isLogdedin()) {
+            alert('You need to login!');
+            this.router.navigate(['/home']);
+            return false;
+        }
+        let requiredRole = next.data['role'];
+        if (requiredRole == null || this.authService.hasRole(requiredRole)) {
+            return true;
+        }
+        return false;
+    }
+}
+
+在这里，我们从将要激活的路由的数据里面得到role，然后判断当前用户是否具有这个角色。这样，我们的这个MyTodoGuard，可以把它定义在根路径上，就可以作为一个通用的用户权限验证的Guard来使用。只要路径上存在这个值，就说明需要权限
