@@ -163,3 +163,18 @@ export class MyTodoGuard implements CanActivateChild {
 }
 
 在这里，我们从将要激活的路由的数据里面得到role，然后判断当前用户是否具有这个角色。这样，我们的这个MyTodoGuard，可以把它定义在根路径上，就可以作为一个通用的用户权限验证的Guard来使用。只要路径上存在这个值，就说明需要权限
+
+
+
+
+==============================================
+Scaffold	Usage
+Component	ng g component my-new-component
+Directive	ng g directive my-new-directive
+Pipe		ng g pipe my-new-pipe
+Service		ng g service my-new-service
+Class		ng g class my-new-class
+Interface	ng g interface my-new-interface
+Enum		ng g enum my-new-enum
+Module		ng g module my-module
+======================
