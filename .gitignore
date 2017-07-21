@@ -40,3 +40,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# mountebank temp files
+mb.log
+mb.pid
+mb1.log
